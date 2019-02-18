@@ -17,7 +17,6 @@ inputElement.submit()
 
 try:
     WebDriverWait(driver, 10).until(EC.title_contains("cheese!"))
-
     print(driver.title)
 
 finally:
