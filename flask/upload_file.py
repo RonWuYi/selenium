@@ -40,13 +40,19 @@ def upload_file():
     '''
 
 
-# from flask import send_from_directory
-#
-#
-# @app.route('/uploads/<filename>')
-# def upload_file(filename):
-#     return send_from_directory(app.config['UPLOAD_FOLDER'],
-#                                filename)
+from flask import send_from_directory
 
 
+@app.route('/uploads/<filename>')
+def upload_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'],
+                               filename)
+
+
+from werkzeug.wsgi import SharedDataMiddleware
+app.add_url_rule('/uploads/<filename>', 'uploaded_file',
+                 build_only=True)
+app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
+    '/uploads':  app.config['UPLOAD_FOLDER']
+})
 
