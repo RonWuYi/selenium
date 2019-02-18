@@ -100,3 +100,4 @@ ENV/
 # mypy
 .mypy_cache/
 .idea/
+/home/hdc/PycharmProjects/selenium/uploadfiles/
