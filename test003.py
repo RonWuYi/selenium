@@ -1,11 +1,6 @@
-from flask import Flask
-app = Flask(__name__)
+from requests import put, get
 
+#put('http://127.0.0.1:5000/todo2', data={'data': 'fuck1'}).json()
 
-@app.route('/')
-def hello():
-    return "Hello!"
-
-
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=True)
+content = get('http://127.0.0.1:5000/todo4').json()
+print(content)

@@ -1,9 +1,10 @@
 import os
-from flask import Flask, flash, request, url_for, redirect
+from flask import Flask, flash, request, url_for, redirect, render_template
 from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = '/tmp/uploadfiles'
-ALLOWED_EXTENSIONS = set(['txt', 'jpg', 'jpeg', 'png'])
+# ALLOWED_EXTENSIONS = set(['txt', 'jpg', 'jpeg', 'png'])
+ALLOWED_EXTENSIONS = set(['jpg', 'jpeg', 'png'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -28,21 +29,25 @@ def upload_file():
             if f and allowed_file(f.filename):
                 filename = secure_filename(f.filename)
                 if os.path.exists(app.config['UPLOAD_FOLDER']):
-                    f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                    if os.path.isfile(os.path.join(app.config['UPLOAD_FOLDER'], filename)):
+                        pass
+                    else:
+                        f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 else:
-                    os.makedirs(app.config['UPLOAD_FOLDER'])
-                    f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                    try:
+                        os.makedirs(app.config['UPLOAD_FOLDER'])
+                    except OSError:
+                        pass
+                    if os.path.isfile(os.path.join(app.config['UPLOAD_FOLDER'], filename)):
+                        pass
+                    else:
+                        f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            else:
+                # return redirect(request.url)
+                return "cannot upload this file"
         return redirect(url_for('upload_file',
                         filename=filename))
-    return '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-        <input type=file name=file multiple>
-        <input type=submit value=Upload>
-    </form>
-    '''
+    return render_template("upload/upload.html")
 
 
 if __name__ == "__main__":
