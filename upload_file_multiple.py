@@ -6,7 +6,8 @@ UPLOAD_FOLDER = '/tmp/uploadfiles'
 # ALLOWED_EXTENSIONS = set(['txt', 'jpg', 'jpeg', 'png'])
 ALLOWED_EXTENSIONS = set(['jpg', 'jpeg', 'png'])
 
-app = Flask(__name__)
+app = Flask(__name__, instance_relative_config=True)
+app.config.from_pyfile('config.py', silent=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
