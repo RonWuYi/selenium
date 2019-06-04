@@ -1,3 +1,4 @@
+import time
 from selenium import webdriver
 # from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
@@ -5,15 +6,47 @@ from selenium.webdriver.support import expected_conditions as EC
 
 driver = webdriver.Firefox()
 
-driver.get("https://www.google.com")
+# driver.get("https://www.google.com")
+driver.get("https://pokeassistant.com/main/ivcalculator")
 
 print(driver.title)
 
-inputElement = driver.find_element_by_name("q")
+# inputElement = driver.find_element_by_name("q")
+pokemon_name = driver.find_element_by_name("search_pokemon_name")
 
-inputElement.send_keys("cheese!")
+pokemon_name.send_keys("Buneary")
 
-inputElement.submit()
+time.sleep(1)
+# pokemon_name = driver.find_element_by_name("search_pokemon_name")
+#
+# pokemon_name.send_keys("503")
+
+search_cp = driver.find_element_by_name("search_cp")
+
+search_cp.send_keys("80")
+
+time.sleep(1)
+
+search_hp = driver.find_element_by_name("search_hp")
+
+search_hp.send_keys("1600")
+
+time.sleep(1)
+
+search_dust = driver.find_element_by_name("search_dust")
+
+search_dust.send_keys("1600")
+
+time.sleep(1)
+# search_dust = driver.find_element_by_name("search_dust")
+#
+# search_dust.send_keys("1600")
+#
+# search_dust = driver.find_element_by_name("search_dust")
+#
+# search_dust.send_keys("1600")
+#
+# inputElement.submit()
 
 try:
     WebDriverWait(driver, 10).until(EC.title_contains("cheese!"))

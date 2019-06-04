@@ -1,25 +1,16 @@
-import logging
-import os
-# import pathlib
-from pathlib import Path
 from datetime import datetime
+import logging.config
 
 
-class Mylog:
-    current_path = Path.cwd()
-
-    def __init__(self, hostname, item, filename, mode):
-
-        # pass
-        self.current_path = Path.cwd()
+def config_basic():
+    logging.basicConfig(
+        filename='log/app_{}.log'.format(str(datetime.today())[:19]),
+        level=logging.WARNING,
+        format='%(levelname)s:%(asctime)s:%(message)s')
 
 
-    @classmethod
-    def main(cls):
-        # logging.basicConfig(
-        #     filename=os.path.join(current_path, )
-        #     filename='app-{}.log'.format(datetime.today()),
-        #     level=logging.ERROR,
-        #     format='%(levelname)s:%(asctime)s:%(message)s'
-        # )
-        pass
+def config_file():
+    logging.config.fileConfig('/home/hdc/PycharmProjects/selenium/logconfig.ini')
+
+# print()
+

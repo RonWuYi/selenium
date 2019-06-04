@@ -1,12 +1,18 @@
-
-from flask import Flask
-from flask.ext.sqlalchemy import SQLAlchemy
 import os
-import psycopg2
-import psycopg2.extensions
+import time
+import logging
 
-app = Flask(__name__)
+from func.mylog import config_basic
 
-def stream_messages(channel):
-    conn = psycopg2.connect(database='mydb', user='postgres',password='postgres',host='172.16.66.244')
-    conn.set_isolation_level()
+
+class Test:
+    def __init__(self):
+        config_basic()
+        logging.error("error happed")
+
+    def main(self):
+        pass
+
+
+if __name__ == '__main__':
+    my_test = Test()
