@@ -80,9 +80,9 @@ def do_calculation(name="Buneary", cp="503", hp="80", dust="1600"):
     time.sleep(1)
     pyautogui.click(x + 75, y + 91)
     time.sleep(1)
-    pyautogui.moveTo(x + 126, y + 172, 0.5)
+    pyautogui.moveTo(x + 126, y + 182, 0.5)
     time.sleep(0.5)
-    pyautogui.click(x + 126, y + 172)
+    pyautogui.click(x + 126, y + 182)
     time.sleep(1)
     input_element.click()
     time.sleep(1)
@@ -107,5 +107,16 @@ my_value = driver.find_element_by_id("possibleCombinationsStringmax")
 print(my_value.text)
 # for elem in my_value:
 #     print(elem.text)
-print(my_value.text[my_value.text[my_value.text.index(":")+2:]])
-print(type(my_value.text[my_value.text[my_value.text.index(":")+2:]]))
+
+max_rate = my_value.text[my_value.text.index(":")+2:]
+print(my_value.text[my_value.text.index(":")+2:])
+print(type(my_value.text[my_value.text.index(":")+2:]))
+
+# print(int(my_value.text[my_value.text.index(":")+2:]))
+
+new_max_rate = float(max_rate.strip('%'))/100.0
+if new_max_rate > 0.89:
+    print(new_max_rate)
+else:
+    pass
+
