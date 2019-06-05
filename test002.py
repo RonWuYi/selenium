@@ -5,8 +5,7 @@ import pyautogui
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 # from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+
 
 driver = webdriver.Firefox()
 driver.maximize_window()
@@ -85,8 +84,9 @@ def do_calculation(name="Buneary", cp="503", hp="80", dust="1600"):
     pyautogui.click(x + 126, y + 182)
     time.sleep(1)
     input_element.click()
+    # time.sleep(1)
+    # input_element.submit()
     time.sleep(1)
-# inputElement.submit()
 
 # try:
 #     WebDriverWait(driver, 10).until(EC.title_contains("cheese!"))
