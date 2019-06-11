@@ -13,4 +13,5 @@ def hello(name="world"):
         raise Fault("unknown_recipient", "I need someone to greet!")
     return "Hello, %s!" % name
 
+
 app.run()
