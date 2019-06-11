@@ -1,4 +1,5 @@
-import os, time
+import os
+import time
 import pyautogui as pya
 
 

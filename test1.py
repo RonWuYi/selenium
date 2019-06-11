@@ -20,6 +20,7 @@ class Mini:
     def __init__(self):
         config_basic()
 
+    # @staticmethod
     def for_log(self):
         logging.debug("this is debug log")
         logging.critical("add critical")

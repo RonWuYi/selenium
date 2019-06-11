@@ -1,5 +1,6 @@
 import os
 
+
 class Config(object):
     UPLOAD_FOLDER = '/tmp/uploadfiles'
     # ALLOWED_EXTENSIONS = set(['txt', 'jpg', 'jpeg', 'png'])
