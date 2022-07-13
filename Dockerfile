@@ -16,6 +16,7 @@ RUN set -eux; \
 		git \
 		wget \
 		cmake \
+		ca-certificates \
 	; \
 
 	apt update; \
