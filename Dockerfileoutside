@@ -8,9 +8,17 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
     && apt-get update \
     && apt-get install -y sudo \
+    && apt-get install -y build-essential \
+    && apt-get install -y neovim \
+    && apt-get install -y curl \
+    && apt-get install -y wget \
+    && apt-get install -y iproute2 \
+    && apt-get install -y git \
+    && apt-get install -y cmake \
+    && apt-get install -y ca-certificates \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME \
-    #
+
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
@@ -20,19 +28,7 @@ USER $USERNAME
 
 # RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.1/zsh-in-docker.sh)" -- \
 COPY zsh-in-docker.sh /tmp
-RUN set -eux; \
-	&& apt-get update; \
-	&& apt-get install -y --no-install-recommends \
-		build-essential \
-		vim \
-		neovim \
-		curl \
-		iproute2 \
-		git \
-		cmake \
-		ca-certificates \
-	; \
-	&& /tmp/zsh-in-docker.sh \
+RUN /tmp/zsh-in-docker.sh \
     -t https://github.com/denysdovhan/spaceship-prompt \
     -a 'SPACESHIP_PROMPT_ADD_NEWLINE="false"' \
     -a 'SPACESHIP_PROMPT_SEPARATE_LINE="false"' \
@@ -44,36 +40,6 @@ RUN set -eux; \
     -p 'history-substring-search' \
     -a 'bindkey "\$terminfo[kcuu1]" history-substring-search-up' \
     -a 'bindkey "\$terminfo[kcud1]" history-substring-search-down' \
-    && apt-get autoremove -y \
-    && apt-get clean -y \
-	&& rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT [ "/bin/zsh" ]
 CMD ["-l"]
-
-# runtime dependencies
-# RUN set -eux; \
-# 	apt-get update; \
-# 	apt-get install -y --no-install-recommends \
-# 		build-essential \
-# 		vim \
-# 		neovim \
-# 		curl \
-# 		iproute2 \
-# 		git \
-# 		wget \
-# 		cmake \
-# 		ca-certificates \
-# 	; \
-
-# 	apt update; \
-# 	apt install -y --no-install-recommends \
-# 		zsh \
-# 	; \
-
-# 	chsh -s $(which zsh); \
-
-# 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"; \
-# 	rm -rf /var/lib/apt/lists/*
-
-# CMD ["zsh"]
