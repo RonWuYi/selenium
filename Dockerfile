@@ -13,6 +13,9 @@ RUN set -eux; \
 		neovim \
 		curl \
 		iproute2 \
+		git \
+		wget \
+		cmake \
 	; \
 
 	apt update; \
@@ -24,5 +27,5 @@ RUN set -eux; \
 
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"; \
 	rm -rf /var/lib/apt/lists/*
-	
+
 CMD ["zsh"]
