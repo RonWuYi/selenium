@@ -1,7 +1,7 @@
 import psycopg2
 
 
-conn = psycopg2.connect(database="testdb", user="postgres", password="postgres", host="172.16.66.244")
+conn = psycopg2.connect(database="testdb", user="postgres", password="postgres", host="192.168.1.1")
 cur = conn.cursor()
 cur.execute("SELECT * from bugs where checked = FALSE order by (name, cp) desc;")
 print(cur.fetchone())
